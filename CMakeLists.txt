@@ -12,7 +12,7 @@ file(GLOB_RECURSE C_SOURCES ./src/*.c ./startup/*.c)
 # 汇编源文件 file( GLOB ASM_SOURCES <file here> )
 
 # 添加头文件目录
-include_directories(include)
+include_directories(include include/third_party/CMSIS/Core/Include)
 
 add_executable(${PROJECT_NAME})
 
@@ -21,9 +21,9 @@ target_link_directories(${PROJECT_NAME} PRIVATE)
 target_link_libraries(${PROJECT_NAME} PRIVATE # c m nosys
 )
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE)
+target_compile_definitions(${PROJECT_NAME} PRIVATE DeviceFamily_MSPM0L130X)
 
-target_compile_options(${PROJECT_NAME} PRIVATE -mcpu=cortex-m0plus)
+target_compile_options(${PROJECT_NAME} PRIVATE -mcpu=cortex-m0plus -lnostd)
 
 target_link_options(${PROJECT_NAME} PRIVATE -T
                     ${PROJECT_SOURCE_DIR}/startup/mspm0l1306.lds -nostdlib)

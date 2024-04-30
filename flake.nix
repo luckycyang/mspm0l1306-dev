@@ -16,7 +16,7 @@
         pkgs = import nixpkgs {inherit system;};
       in {
         devShells = rec {
-          embed = pkgs.mkShell {
+          embed = pkgs.mkShell.override {stdenv = pkgs.clangStdenv;} {
             name = "embed";
             buildInputs = with pkgs; [
               openocd
@@ -24,6 +24,8 @@
               ninja
               cmake
               gcc-arm-embedded
+              rocmPackages.llvm.clang-tools-extra
+              rocmPackages.llvm.llvm
             ];
           };
           default = embed;
