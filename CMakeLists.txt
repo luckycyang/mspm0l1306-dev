@@ -7,12 +7,13 @@ project(app C ASM)
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
 # 源文件
-file(GLOB_RECURSE C_SOURCES ./src/*.c ./startup/*.c)
+file(GLOB_RECURSE C_SOURCES ./src/*.c ./startup/*.c include/ti/driverlib/*.c
+     sysconfig/*.c)
 
 # 汇编源文件 file( GLOB ASM_SOURCES <file here> )
 
 # 添加头文件目录
-include_directories(include include/third_party/CMSIS/Core/Include)
+include_directories(include include/third_party/CMSIS/Core/Include sysconfig)
 
 add_executable(${PROJECT_NAME})
 
